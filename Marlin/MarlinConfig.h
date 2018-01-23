@@ -23,6 +23,8 @@
 #ifndef MARLIN_CONFIG_H
 #define MARLIN_CONFIG_H
 
+
+#include "Arduino.h"
 #include "fastio.h"
 #include "macros.h"
 #include "boards.h"
@@ -35,7 +37,6 @@
 #ifndef USBCON
   #define HardwareSerial_h // trick to disable the standard HWserial
 #endif
-#include "Arduino.h"
 #include "Conditionals_post.h"
 #include "SanityCheck.h"
 
