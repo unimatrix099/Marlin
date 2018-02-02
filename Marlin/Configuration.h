@@ -1473,7 +1473,7 @@
  *  *** Beta, use with caution *** 
  *   
  */ 
-//#define USE_NEW_SD_FAT_LIB
+#define USE_NEW_SD_FAT_LIB
 
 /**
  * SD CARD: SPI SPEED
