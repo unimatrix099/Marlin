@@ -991,6 +991,8 @@ void gcode_line_error(const char* err, bool doFlush = true) {
   serial_count = 0;
 }
 
+bool errorMode = false;
+
 /**
  * Get all commands waiting on the serial port and queue them.
  * Exit when the buffer is full or when no more characters are
@@ -1036,8 +1038,7 @@ inline void get_serial_commands() {
       while (*command == ' ') command++;                // Skip leading spaces
       char *npos = (*command == 'N') ? command : NULL;  // Require the N parameter to start the line
 
-      if (npos) {
-
+      if (npos || (errorMode && card.saving)) {
         bool M110 = strstr_P(command, PSTR("M110")) != NULL;
 
         if (M110) {
@@ -1048,6 +1049,7 @@ inline void get_serial_commands() {
         gcode_N = strtol(npos + 1, NULL, 10);
 
         if (gcode_N != gcode_LastN + 1 && !M110) {
+          errorMode = true;
           gcode_line_error(PSTR(MSG_ERR_LINE_NO));
           return;
         }
@@ -1057,16 +1059,19 @@ inline void get_serial_commands() {
           uint8_t checksum = 0, count = uint8_t(apos - command);
           while (count) checksum ^= command[--count];
           if (strtol(apos + 1, NULL, 10) != checksum) {
+            errorMode = true;
             gcode_line_error(PSTR(MSG_ERR_CHECKSUM_MISMATCH));
             return;
           }
         }
         else {
+          errorMode = true;
           gcode_line_error(PSTR(MSG_ERR_NO_CHECKSUM));
           return;
         }
 
         gcode_LastN = gcode_N;
+        errorMode = false;
       }
 
       // Movement commands alert when stopped
