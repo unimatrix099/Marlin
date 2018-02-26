@@ -1056,6 +1056,12 @@ inline void get_serial_commands() {
 
         char *apos = strrchr(command, '*');
         if (apos) {
+          char *apos1 = strchr(command, '*');
+          if (apos != apos1){
+            errorMode = true;
+            gcode_line_error(PSTR(MSG_ERR_CHECKSUM_MISMATCH));
+            return;
+          }
           uint8_t checksum = 0, count = uint8_t(apos - command);
           while (count) checksum ^= command[--count];
           if (strtol(apos + 1, NULL, 10) != checksum) {
