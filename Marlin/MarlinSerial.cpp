@@ -206,7 +206,7 @@
         // we run out of RX buffer space .. We need 325 bytes @ 250kbits/s to
         // let the host react and stop sending bytes. This translates to 13mS
         // propagation time.
-        if (rx_count >= (RX_BUFFER_SIZE) / 8) {
+        if (rx_count >= (RX_BUFFER_SIZE) / 16) {
           // If TX interrupts are disabled and data register is empty,
           // just write the byte to the data register and be done. This
           // shortcut helps significantly improve the effective datarate
@@ -360,7 +360,7 @@
             ring_buffer_pos_t rx_count = (ring_buffer_pos_t)(rx_buffer.head - rx_buffer.tail) & (ring_buffer_pos_t)(RX_BUFFER_SIZE - 1);
             // When below 10% of RX buffer capacity, send XON before
             // running out of RX buffer bytes
-            if (rx_count < (RX_BUFFER_SIZE) / 10) {
+            if (rx_count < (RX_BUFFER_SIZE) / 32) {
               xon_xoff_state = XON_CHAR | XON_XOFF_CHAR_SENT;
               CRITICAL_SECTION_END;       // End critical section before returning!
               writeNoHandshake(XON_CHAR);
