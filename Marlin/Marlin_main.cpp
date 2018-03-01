@@ -1086,8 +1086,9 @@ inline void get_serial_commands() {
             writingToSD = false;
           }
           else{
-            serial_count = 0;
-            return;
+           errorMode = true;
+           gcode_line_error(PSTR(MSG_ERR_CHECKSUM_MISMATCH));
+           return;
           }
         }
       }
