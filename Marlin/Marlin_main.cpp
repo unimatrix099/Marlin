@@ -992,6 +992,7 @@ void gcode_line_error(const char* err, bool doFlush = true) {
 }
 
 bool errorMode = false;
+bool writingToSD = false;
 
 /**
  * Get all commands waiting on the serial port and queue them.
@@ -1080,9 +1081,14 @@ inline void get_serial_commands() {
         errorMode = false;
       }
       else{
-        if (card.saving && errorMode){
-          serial_count = 0;
-          return;
+        if (writingToSD){
+          if (strstr(command, "M29") != NULL) {
+            writingToSD = false;
+          }
+          else{
+            serial_count = 0;
+            return;
+          }
         }
       }
 
@@ -6822,7 +6828,7 @@ inline void gcode_M17() {
   /**
    * M28: Start SD Write
    */
-  inline void gcode_M28() { card.openFile(parser.string_arg, false); }
+  inline void gcode_M28() { card.openFile(parser.string_arg, false); writingToSD = true; }
 
   /**
    * M29: Stop SD Write
@@ -6830,6 +6836,7 @@ inline void gcode_M17() {
    */
   inline void gcode_M29() {
     // card.saving = false;
+    writingToSD = false;
   }
 
   /**
