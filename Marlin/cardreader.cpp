@@ -519,9 +519,7 @@ void CardReader::write_command(char *buf) {
   end[1] = '\r';
   end[2] = '\n';
   end[3] = '\0';
-  if (*begin=='G' || *begin=='M' || *begin=='T'){
-    file.write(begin);
-  }
+  file.write(begin);
   if (file.writeError) {
     SERIAL_ERROR_START();
     SERIAL_ERRORLNPGM(MSG_SD_ERR_WRITE_TO_FILE);
