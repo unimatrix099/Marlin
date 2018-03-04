@@ -518,14 +518,17 @@
   #define DELTA_RADIUS (DELTA_SMOOTH_ROD_OFFSET-(DELTA_EFFECTOR_OFFSET)-(DELTA_CARRIAGE_OFFSET))
 
   // height from z=0 to home position
-  #define DELTA_HEIGHT 286.80 // get this value from auto calibrate
+  #define DELTA_HEIGHT 291.36 // get this value from auto calibrate
 
-  #define DELTA_ENDSTOP_ADJ { 0.0, 0.0, 0.0 } // get these from auto calibrate
+  #define DELTA_ENDSTOP_ADJ { -0.33, 0.0, -0.14 } // get these from auto calibrate
 
+  // M666 X-0.33 Y0.00 Z-0.14
+  // M665 L271.50 R133.57 H291.36 S200.00 B80.00 X-0.57 Y0.16 Z0.41
+  
   // Trim adjustments for individual towers
   // tower angle corrections for X and Y tower / rotate XYZ so Z tower angle = 0
   // measured in degrees anticlockwise looking from above the printer
-  #define DELTA_TOWER_ANGLE_TRIM { 0.0, 0.0, 0.0 } // get these values from auto calibrate
+  #define DELTA_TOWER_ANGLE_TRIM { -0.57, 0.16, 0.41 } // get these values from auto calibrate
 
   // delta radius and diaginal rod adjustments measured in mm
   //#define DELTA_RADIUS_TRIM_TOWER { 0.0, 0.0, 0.0 }
