@@ -1037,7 +1037,6 @@ inline void get_serial_commands() {
       char *npos = (*command == 'N') ? command : NULL;  // Require the N parameter to start the line
 
       if (npos) {
-
         bool M110 = strstr_P(command, PSTR("M110")) != NULL;
 
         if (M110) {
@@ -1068,6 +1067,14 @@ inline void get_serial_commands() {
 
         gcode_LastN = gcode_N;
       }
+      #if ENABLED(FOCE_CHECKSUM_SD_SAVING)
+      else{
+        if (card.saving){
+           gcode_line_error(PSTR(MSG_ERR_CHECKSUM_MISMATCH));
+           return;
+        }
+      }
+      #endif
 
       // Movement commands alert when stopped
       if (IsStopped()) {

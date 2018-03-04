@@ -1479,6 +1479,16 @@
 //#define USE_NEW_SD_FAT_LIB
 
 /**
+ * ALLOW ONLY CHECKSUM COMMANDS WHEN SAVING TO FILE
+ * 
+ * When streaming commands to sd with XON/XOFF error can occur and 
+ * incomplete commands can be written that failed checksum.
+ * This will force to accept only commands with checksum when saving
+ * a file to sd.
+ */
+//#define FOCE_CHECKSUM_SD_SAVING
+
+/**
  * SD CARD: SPI SPEED
  *
  * Enable one of the following items for a slower SPI transfer speed.
