@@ -1486,7 +1486,7 @@
  * This will force to accept only commands with checksum when saving
  * a file to sd.
  */
-//#define FOCE_CHECKSUM_SD_SAVING
+#define FOCE_CHECKSUM_SD_SAVING
 
 /**
  * SD CARD: SPI SPEED
