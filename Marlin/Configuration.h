@@ -569,6 +569,7 @@
 //===========================================================================
 // Enable DELTA kinematics and most of the default configuration for Deltas
 #define DELTA
+#define ANYCUBIC_KOSSEL_PLUS
 
 #if ENABLED(DELTA)
 
