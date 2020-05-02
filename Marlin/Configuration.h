@@ -589,6 +589,7 @@
 
   // After homing move down to a height where XY movement is unconstrained
   #define DELTA_HOME_TO_SAFE_ZONE
+  #define DELTA_HOME_TO_SAFE_ZONE_HEIGHT 285
 
   // Delta calibration menu
   // uncomment to add three points calibration menu option.
