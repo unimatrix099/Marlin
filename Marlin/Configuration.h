@@ -885,7 +885,7 @@
 // @section delta
 
 // Enable for DELTA kinematics and configure below
-//#define DELTA
+#define DELTA
 #if ENABLED(DELTA)
 
   // Make delta curves from many straight lines (linear interpolation).
