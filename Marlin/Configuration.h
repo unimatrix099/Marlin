@@ -753,9 +753,9 @@
  * the issues involved, don't use bed PID until someone else verifies that your hardware works.
  * @section bed temp
  */
-#if ANYCUBIC_KOSSEL_ENABLE_BED > 0
-  #define PIDTEMPBED
-#endif
+// #if ANYCUBIC_KOSSEL_ENABLE_BED > 0
+//   #define PIDTEMPBED
+// #endif
 //#define BED_LIMIT_SWITCHING
 
 /**
